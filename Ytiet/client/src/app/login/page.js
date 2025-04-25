@@ -1,6 +1,5 @@
 "use client";
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { AdminLogIn } from "@/Helper/AdminLogIn";
 import { AdminSignUp } from "@/Helper/AdminSignUp";
 import ColorRingLoader from "@/components/Common/Others/ColorRingLoader";
@@ -19,6 +18,7 @@ const SignInForm = () => {
   const [ProfilePicURL, setProfilePicURL] = useState("");
   const [NewUsername, setNewUsername] = useState("");
   const [NewPassword, setNewPassword] = useState("");
+  const [FailedAttempts, setFailedAttempts] = useState(0); // Track failed login attempts
 
   const [ShowMessage, setShowMessage] = useState("");
   const [LogSign, setLogSign] = useState(false); // false for login, true for signup
@@ -70,14 +70,31 @@ const SignInForm = () => {
       if (res.success) {
         setAuthUser(res.admin);
         setShowMessage(res.message || "Login successful");
+        setFailedAttempts(0); // Reset failed attempts on successful login
         setTimeout(() => {
           nav.push("/admin/dashboard");
         }, 1000);
       } else {
-        setShowMessage(res.message || "Login failed");
+        const newFailedAttempts = FailedAttempts + 1;
+        setFailedAttempts(newFailedAttempts);
+        if (newFailedAttempts >= 3) {
+          setShowMessage("Too many failed attempts. Please update your credentials.");
+          setShowUpdateForm(true); // Show the update credentials form
+          setFailedAttempts(0); // Reset after showing the form
+        } else {
+          setShowMessage(res.message || "Login failed");
+        }
       }
     } catch (error) {
-      setShowMessage(error?.message || "Error during login");
+      const newFailedAttempts = FailedAttempts + 1;
+      setFailedAttempts(newFailedAttempts);
+      if (newFailedAttempts >= 3) {
+        setShowMessage("Too many failed attempts. Please update your credentials.");
+        setShowUpdateForm(true);
+        setFailedAttempts(0);
+      } else {
+        setShowMessage(error?.message || "Error during login");
+      }
     }
     setRingLoad(false);
   };
@@ -91,12 +108,13 @@ const SignInForm = () => {
         password: NewPassword,
       });
       if (res.data.success) {
-        setShowMessage(res.data.message || "Credentials updated");
+        setShowMessage(res.data.message || "Credentials updated successfully");
         setTimeout(() => {
           setShowUpdateForm(false);
           setShowMessage("");
           setNewUsername("");
           setNewPassword("");
+          setPassword(""); // Clear password field after update
         }, 1000);
       } else {
         setShowMessage(res.data.message || "Update failed");
@@ -254,51 +272,40 @@ const SignInForm = () => {
                 )}
               </>
             )}
-            {authUser && authUser.isAdmin && (
-              <div>
+            {ShowUpdateForm && (
+              <div className="space-y-3">
+                <input
+                  type="text"
+                  name="NewUsername"
+                  id="NewUsername"
+                  className={InputFieldClass}
+                  placeholder="New Username"
+                  value={NewUsername}
+                  onChange={(e) => setNewUsername(e.target.value)}
+                />
+                <input
+                  type="password"
+                  name="NewPassword"
+                  id="NewPassword"
+                  className={InputFieldClass}
+                  placeholder="New Password"
+                  value={NewPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
                 <button
                   type="button"
-                  className="block w-full rounded-md text-white bg-gradient-to-r from-green-500 via-green-600 to-green-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 shadow-lg shadow-green-500/50 font-medium text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                  onClick={() => setShowUpdateForm(true)}
+                  className="block w-full rounded-md text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-lg shadow-blue-500/50 font-medium text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                  onClick={UpdateCredentials}
                 >
-                  Update Credentials
+                  Save Changes
                 </button>
-                {ShowUpdateForm && (
-                  <div className="space-y-3">
-                    <input
-                      type="text"
-                      name="NewUsername"
-                      id="NewUsername"
-                      className={InputFieldClass}
-                      placeholder="New Username"
-                      value={NewUsername}
-                      onChange={(e) => setNewUsername(e.target.value)}
-                    />
-                    <input
-                      type="password"
-                      name="NewPassword"
-                      id="NewPassword"
-                      className={InputFieldClass}
-                      placeholder="New Password"
-                      value={NewPassword}
-                      onChange={(e) => setNewPassword(e.target.value)}
-                    />
-                    <button
-                      type="button"
-                      className="block w-full rounded-md text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-lg shadow-blue-500/50 font-medium text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                      onClick={UpdateCredentials}
-                    >
-                      Save Changes
-                    </button>
-                    <button
-                      type="button"
-                      className="block w-full rounded-md text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 shadow-lg shadow-red-500/50 font-medium text-sm px-5 py-2.5 text-center mr-2 mb-2"
-                      onClick={() => setShowUpdateForm(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                )}
+                <button
+                  type="button"
+                  className="block w-full rounded-md text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 shadow-lg shadow-red-500/50 font-medium text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                  onClick={() => setShowUpdateForm(false)}
+                >
+                  Cancel
+                </button>
               </div>
             )}
             <p className="text-sm text-gray-900 dark:text-gray-400">
@@ -308,6 +315,7 @@ const SignInForm = () => {
                 onClick={() => {
                   setLogSign((prev) => !prev);
                   setShowMessage("");
+                  setFailedAttempts(0); // Reset failed attempts when switching forms
                   setName("");
                   setUserName("");
                   setContact("");
