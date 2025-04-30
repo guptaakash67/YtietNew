@@ -191,6 +191,18 @@
             "Description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
             "PageLink": "/",
             "BannerPic": "/images/clgg.jpg"
+          },
+          {
+            "Title": "Farewell Party",
+            "Description": "Be final yr party",
+            "PageLink": "/",
+            "BannerPic": "/images/batt..png"
+          },
+          {
+            "Title": "Convacation",
+            "Description": "25",
+            "PageLink": "/",
+            "BannerPic": "/images/batt..png"
           }
         ],
       
