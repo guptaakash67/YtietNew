@@ -2,11 +2,11 @@
   "name": "ytiet",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
+"scripts": {
+  "build": "next build",
+  "dev": "next dev",
+  "start": "next start"
+},
   "author": "",
   "license": "ISC",
   "description": "",
