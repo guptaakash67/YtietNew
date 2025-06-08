@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
 "scripts": {
-  "build": "next build",
+"build": "npm install --legacy-peer-deps && next build",
   "dev": "next dev",
   "start": "next start"
 },
