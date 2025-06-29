@@ -26,21 +26,12 @@
 ![WhatsApp Image 2025-06-06 at 22 25 07_2cd65504](https://github.com/user-attachments/assets/6f427fc7-7af8-4796-af1d-ab620e490787)
 ![WhatsApp Image 2025-06-06 at 22 25 08_75d50063](https://github.com/user-attachments/assets/a68e247c-d8f2-4f3d-910b-5784ed709ee5)
 ![WhatsApp Image 2025-06-06 at 22 25 08_12467d0a](https://github.com/user-attachments/assets/b4ff7c15-b584-4b8b-b074-0b395cefaf7f)
-
 ![WhatsApp Image 2025-06-06 at 22 25 08_017f1d75](https://github.com/user-attachments/assets/2a178b8b-e2d2-4a35-b263-2bc3052330de)
-
 ![WhatsApp Image 2025-06-06 at 22 25 09_46d5f5b6](https://github.com/user-attachments/assets/10f2fa56-1a66-482a-8bd2-7224e6b5f295)
-
 ![WhatsApp Image 2025-06-06 at 22 25 09_1adb1fdd](https://github.com/user-attachments/assets/523ee0fa-3a7f-45dd-9890-f4cdd2de95ce)
-
 ![WhatsApp Image 2025-06-06 at 22 25 09_4893a46f](https://github.com/user-attachments/assets/d7008032-ebfb-4bd6-bc3b-22af06deb87e)
-
 ![WhatsApp Image 2025-06-06 at 22 25 10_4d7c510f](https://github.com/user-attachments/assets/0ab0e9dc-799d-458e-ba54-915dd83f85e7)
-
 ![WhatsApp Image 2025-06-06 at 22 25 10_0a11b666](https://github.com/user-attachments/assets/3ae0a706-4846-44f5-9288-2d10860baa78)
-
 ![WhatsApp Image 2025-06-06 at 22 25 11_fbe58102](https://github.com/user-attachments/assets/24eb92d6-cbbf-4b33-95ab-f9dc844df546)
-
 ![WhatsApp Image 2025-06-06 at 22 25 11_0d5501a4](https://github.com/user-attachments/assets/6364050d-c763-4745-a4ab-be8b16fc8b2e)
-
 ![WhatsApp Image 2025-06-06 at 22 25 11_7e726360](https://github.com/user-attachments/assets/d9b34b31-6294-43c9-9933-dbdd95fb7194)
