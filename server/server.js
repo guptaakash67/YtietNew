@@ -1,19 +1,22 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: process.env.FRONTEND_URI || 'http://localhost:3000',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
 
 // Database connection
-mongoose.connect("mongodb://127.0.0.1:27017/ytiet")
+mongoose.connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/ytiet")
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
@@ -171,4 +174,8 @@ app.post('/api/v1/event', async (req, res) => {
 
 // Start the server
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Server started at http://localhost:${PORT}`));
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => console.log(`Server started at http://localhost:${PORT}`));
+}
+
+export default app;

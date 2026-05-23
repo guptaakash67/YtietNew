@@ -24,7 +24,7 @@ import axios from 'axios';
 
 const FetchEventsData = async () => {
   try {
-    const response = await axios.get('http://localhost:4000/api/v1/events/getevents');
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVERURL}/api/v1/events/getevents`);
     console.log('API Response:', response.data); // Log the response for debugging
     return response.data;
   } catch (err) {
